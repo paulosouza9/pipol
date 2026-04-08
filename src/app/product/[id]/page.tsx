@@ -10,8 +10,9 @@ export function generateStaticParams() {
   }));
 }
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = products.find((p) => p.id === params.id);
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  const product = products.find((p) => p.id === resolvedParams.id);
 
   if (!product) {
     notFound();
@@ -42,16 +43,12 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             <h1 className={`${styles.title} ${styles.animateIn} ${styles.delay2}`}>
               {product.name}
             </h1>
-            <p className={`${styles.price} ${styles.animateIn} ${styles.delay3}`}>
-              {product.price}
-            </p>
             
             <div className={`${styles.description} ${styles.animateIn} ${styles.delay3}`}>
               <p>{product.description}</p>
             </div>
 
             <div className={`${styles.actions} ${styles.animateIn} ${styles.delay4}`}>
-              <button className={styles.primaryBtn}>Añadir al carrito</button>
               <Link href="/contact" className={styles.secondaryBtn}>
                 Consultar pieza
               </Link>
