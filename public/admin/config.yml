@@ -1,0 +1,42 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to main)
+
+# This enables the local proxy server for development
+local_backend: true
+
+media_folder: "public/images" # Media files will be stored in the repo under public/images
+public_folder: "/images" # The src attribute for uploaded media will begin with /images
+
+collections:
+  - name: "products"
+    label: "Productos"
+    folder: "src/content/products"
+    create: true
+    slug: "{{id}}"
+    identifier_field: name
+    fields:
+      - {label: "ID", name: "id", widget: "string", hint: "Unique identifier like '1' or 'pipol-1'"}
+      - {label: "Nombre", name: "name", widget: "string"}
+      - {label: "Precio (Opcional)", name: "price", widget: "string", required: false}
+      - {label: "Imagen", name: "image", widget: "image"}
+      - label: "Detalles Técnicos"
+        name: "details"
+        widget: "object"
+        fields:
+          - {label: "Material", name: "material", widget: "string"}
+          - {label: "Acabado", name: "finish", widget: "string"}
+          - {label: "Dimensiones", name: "dimensions", widget: "string"}
+          - {label: "Autenticidad", name: "authenticity", widget: "string"}
+      - {label: "Descripción Markdown", name: "body", widget: "markdown"}
+
+  - name: "news"
+    label: "Novedades"
+    folder: "src/content/novedades"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Imagen", name: "image", widget: "image", required: false}
+      - {label: "Contenido", name: "body", widget: "markdown"}

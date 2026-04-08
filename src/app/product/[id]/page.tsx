@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { products } from "@/data/products";
+import Markdown from "react-markdown";
+import { getProducts, getProductById } from "@/lib/api";
 import styles from "./product.module.css";
 
 export function generateStaticParams() {
+  const products = getProducts();
   return products.map((product) => ({
     id: product.id,
   }));
@@ -12,7 +14,7 @@ export function generateStaticParams() {
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;
-  const product = products.find((p) => p.id === resolvedParams.id);
+  const product = getProductById(resolvedParams.id);
 
   if (!product) {
     notFound();
@@ -45,7 +47,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
             </h1>
             
             <div className={`${styles.description} ${styles.animateIn} ${styles.delay3}`}>
-              <p>{product.description}</p>
+              <Markdown>{product.description}</Markdown>
             </div>
 
             <div className={`${styles.actions} ${styles.animateIn} ${styles.delay4}`}>

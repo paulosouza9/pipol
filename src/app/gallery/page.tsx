@@ -2,9 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../gallery.module.css";
-import { products } from "@/data/products";
+import { getProducts } from "@/lib/api";
 
 export default function Gallery() {
+    const products = getProducts();
     return (
         <div className={styles.container}>
             <header className={styles.header}>
