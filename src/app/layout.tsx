@@ -7,10 +7,10 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "pipol - Esculturas",
-  description: "Exposición y venta de esculturas exclusivas.",
+  title: "pipol",
+  description: "Esculturas revolucionarias en Ibiza",
   icons: {
-    icon: '/images/logo.png',
+    icon: '/images/favicon.jpg',
   },
 };
 
