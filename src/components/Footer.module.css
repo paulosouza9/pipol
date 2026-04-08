@@ -1,0 +1,35 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 2rem;
+    margin-top: auto;
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.links li {
+    cursor: pointer;
+}
+
+.links li:hover {
+    color: var(--foreground);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}

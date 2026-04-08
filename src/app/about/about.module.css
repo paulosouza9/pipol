@@ -1,0 +1,131 @@
+.main {
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--foreground);
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animateIn {
+    animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+}
+
+.delay1 { animation-delay: 0.2s; }
+.delay2 { animation-delay: 0.5s; }
+.delay3 { animation-delay: 0.8s; }
+
+/* Hero Section */
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.heroText {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    text-align: center;
+    max-width: 1000px;
+}
+
+.heroText span {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gray-dark);
+}
+
+/* Split Section */
+.splitSection {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding: 5rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .splitSection {
+        grid-template-columns: 1fr 1fr;
+        padding: 10rem 4rem;
+    }
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.image {
+    object-fit: cover;
+    transition: transform 1.5s ease;
+}
+
+.imageWrapper:hover .image {
+    transform: scale(1.05);
+}
+
+.splitText {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--gray-dark);
+}
+
+/* Statement Section */
+.statementSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.finalStatement {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin-bottom: 5rem;
+    max-width: 1000px;
+}
+
+.finalStatement span {
+    font-style: italic;
+    color: var(--gray-dark);
+}
+
+.statementImageWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+}
