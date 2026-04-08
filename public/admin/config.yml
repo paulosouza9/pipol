@@ -1,7 +1,9 @@
 backend:
   name: git-gateway
+  repo: paulosouza9/pipol-cms
   branch: main # Branch to update (optional; defaults to main)
-
+  base_url: https://pipol-cms.vercel.app
+  auth_endopint: auth
 # This enables the local proxy server for development
 local_backend: true
 
