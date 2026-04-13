@@ -5,10 +5,13 @@ import Image from "next/image";
 import styles from "./HeroCarousel.module.css";
 
 const IMAGES = [
-  { src: "/images/pipol1.jpg", alt: "Escultura 1" },
-  { src: "/images/pipol2.jpg", alt: "Escultura 2" },
-  { src: "/images/pipol3.jpg", alt: "Escultura 3" },
-  { src: "/images/pipol4.jpg", alt: "Escultura 4" },
+  { src: "/images/main/1.jpeg", alt: "Escultura 1" },
+  { src: "/images/main/2.JPG", alt: "Escultura 2" },
+  { src: "/images/main/3.JPG", alt: "Escultura 3" },
+  { src: "/images/main/4.jpeg", alt: "Escultura 4" },
+  { src: "/images/main/5.jpeg", alt: "Escultura 5" },
+  { src: "/images/main/6.jpg", alt: "Escultura 6" },
+  { src: "/images/main/7.jpeg", alt: "Escultura 7" },
 ];
 
 export default function HeroCarousel() {
@@ -26,17 +29,16 @@ export default function HeroCarousel() {
       {IMAGES.map((img, index) => (
         <div
           key={img.src}
-          className={`${styles.imageContainer} ${
-            index === currentIndex ? styles.active : ""
-          }`}
+          className={`${styles.imageContainer} ${index === currentIndex ? styles.active : ""
+            }`}
         >
           <Image
             src={img.src}
             alt={img.alt}
-            width={1000}
-            height={1200}
-            style={{ width: "100%", height: "auto" }}
+            fill
+            className={styles.image}
             priority={index === 0}
+            sizes="(max-width: 600px) 100vw, 600px"
           />
         </div>
       ))}
@@ -44,9 +46,8 @@ export default function HeroCarousel() {
         {IMAGES.map((_, index) => (
           <button
             key={index}
-            className={`${styles.dot} ${
-              index === currentIndex ? styles.activeDot : ""
-            }`}
+            className={`${styles.dot} ${index === currentIndex ? styles.activeDot : ""
+              }`}
             onClick={() => setCurrentIndex(index)}
             aria-label={`Ir a la imagen ${index + 1}`}
           />
