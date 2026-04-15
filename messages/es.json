@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "description": "Esculturas revolucionarias en Ibiza"
+  },
+  "nav": {
+    "news": "Novedades",
+    "gallery": "Galería",
+    "about": "Sobre nosotros",
+    "contact": "Contacto"
+  },
+  "about": {
+    "heroText": "Pipol es una serie de esculturas minimalistas que exploran la <bold1>simplicidad</bold1>, el <bold2>equilibrio</bold2> y la <bold3>presencia</bold3>.",
+    "splitText": "Nacidas a partir de un objeto cotidiano, las figuras anónimas y de cabeza cuadrada funcionan como símbolos de una manera directa y sin ruido de estar en el mundo.",
+    "statement": "Entre lo artesanal y lo industrial, Pipol reivindica la belleza de lo simple y la importancia del <bold>gesto</bold>.",
+    "imageAlt1": "Detalle escultura Pipol",
+    "imageAlt2": "Ambiente Pipol"
+  },
+  "contact": {
+    "eyebrow": "Contacto",
+    "headline1": "Hablemos",
+    "headline2": "de arte.",
+    "tagline": "Cada escultura nace de una conversación.",
+    "phoneLabel": "Teléfono",
+    "mapLabel": "Encuéntranos",
+    "footer": "pipol — Arte contemporáneo"
+  },
+  "gallery": {
+    "title": "Colección pipol",
+    "breadcrumbHome": "Home"
+  },
+  "news": {
+    "breadcrumbHome": "Home",
+    "breadcrumbNews": "Novedades",
+    "title": "Novedades",
+    "empty": "Próximamente nuevas esculturas."
+  },
+  "product": {
+    "breadcrumbHome": "Home",
+    "breadcrumbGallery": "Galería",
+    "inquire": "Consultar pieza",
+    "technicalDetails": "Detalles técnicos",
+    "material": "Material",
+    "finish": "Acabado",
+    "dimensions": "Dimensiones",
+    "authenticity": "Autenticidad"
+  }
+}

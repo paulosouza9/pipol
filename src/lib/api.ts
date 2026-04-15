@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { translateText } from './translate';
 
 // Schema types
 export interface Product {
@@ -36,20 +37,23 @@ export function getProducts(): Product[] {
     const fileNames = fs.readdirSync(productsDirectory);
     const allProductsData = fileNames
         .filter(fileName => fileName.endsWith('.md'))
-        .map(fileName => {
-            const fullPath = path.join(productsDirectory, fileName);
-            const fileContents = fs.readFileSync(fullPath, 'utf8');
+        .flatMap(fileName => {
+            try {
+                const fullPath = path.join(productsDirectory, fileName);
+                const fileContents = fs.readFileSync(fullPath, 'utf8');
+                const matterResult = matter(fileContents);
 
-            const matterResult = matter(fileContents);
-
-            return {
-                id: matterResult.data.id,
-                name: matterResult.data.name,
-                price: matterResult.data.price,
-                image: matterResult.data.image,
-                details: matterResult.data.details,
-                description: matterResult.content, // Using the markdown body as the description
-            } as Product;
+                return [{
+                    id: matterResult.data.id,
+                    name: matterResult.data.name,
+                    price: matterResult.data.price,
+                    image: matterResult.data.image,
+                    details: matterResult.data.details,
+                    description: matterResult.content,
+                } as Product];
+            } catch {
+                return [];
+            }
         });
 
     return allProductsData;
@@ -68,20 +72,32 @@ export function getNews(): NewsArticle[] {
     const fileNames = fs.readdirSync(newsDirectory);
     const allNewsData = fileNames
         .filter(fileName => fileName.endsWith('.md'))
-        .map(fileName => {
-            const slug = fileName.replace(/\.md$/, '');
-            const fullPath = path.join(newsDirectory, fileName);
-            const fileContents = fs.readFileSync(fullPath, 'utf8');
+        .flatMap(fileName => {
+            try {
+                const slug = fileName.replace(/\.md$/, '');
+                const fullPath = path.join(newsDirectory, fileName);
+                const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-            const matterResult = matter(fileContents);
+                const matterResult = matter(fileContents);
 
-            return {
-                slug,
-                title: matterResult.data.title,
-                date: matterResult.data.date,
-                image: matterResult.data.image,
-                body: matterResult.content,
-            } as NewsArticle;
+                const rawDate = matterResult.data.date;
+                const date =
+                    rawDate instanceof Date
+                        ? rawDate.toISOString()
+                        : typeof rawDate === 'string'
+                        ? rawDate
+                        : String(rawDate ?? '');
+
+                return [{
+                    slug,
+                    title: matterResult.data.title,
+                    date,
+                    image: matterResult.data.image,
+                    body: matterResult.content,
+                } as NewsArticle];
+            } catch {
+                return [];
+            }
         });
 
     // Sort news by date
@@ -91,4 +107,55 @@ export function getNews(): NewsArticle[] {
 export function getNewsBySlug(slug: string): NewsArticle | undefined {
     const news = getNews();
     return news.find(n => n.slug === slug);
+}
+
+// ─── Localized (translated) variants ────────────────────────────────────────
+
+async function translateProduct(product: Product): Promise<Product> {
+    const [name, description, material, finish, authenticity] = await Promise.all([
+        product.name,
+        translateText(product.description),
+        translateText(product.details.material),
+        translateText(product.details.finish),
+        translateText(product.details.authenticity),
+    ]);
+
+    return {
+        ...product,
+        name,
+        description,
+        details: {
+            ...product.details,
+            material,
+            finish,
+            authenticity,
+        },
+    };
+}
+
+async function translateNews(article: NewsArticle): Promise<NewsArticle> {
+    const body = await translateText(article.body);
+    return { ...article, body };
+}
+
+export async function getProductsLocalized(locale: string): Promise<Product[]> {
+    const products = getProducts();
+    if (locale === 'es') return products;
+    return Promise.all(products.map(translateProduct));
+}
+
+export async function getProductByIdLocalized(
+    id: string,
+    locale: string
+): Promise<Product | undefined> {
+    const product = getProductById(id);
+    if (!product) return undefined;
+    if (locale === 'es') return product;
+    return translateProduct(product);
+}
+
+export async function getNewsLocalized(locale: string): Promise<NewsArticle[]> {
+    const news = getNews();
+    if (locale === 'es') return news;
+    return Promise.all(news.map(translateNews));
 }

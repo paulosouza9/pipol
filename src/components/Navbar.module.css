@@ -16,9 +16,53 @@
     align-items: center;
 }
 
-.contactBtn {
+.topBarRight {
     position: absolute;
     right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.localeSwitcher {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.localeBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray-dark);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.3rem;
+    transition: color 0.2s;
+    font-family: inherit;
+}
+
+.localeBtn:hover {
+    color: var(--foreground);
+}
+
+.localeBtnActive {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.localeDivider {
+    color: var(--gray-dark);
+    font-size: 0.65rem;
+    opacity: 0.5;
+}
+
+.contactBtn {
     padding: 0.5rem 1.5rem;
     border: 1px solid var(--foreground);
     border-radius: 9999px;
@@ -42,7 +86,7 @@
         gap: 1rem;
     }
 
-    .contactBtn {
+    .topBarRight {
         position: relative;
         right: 0;
     }
@@ -130,4 +174,17 @@
 .transparentNav .contactBtn:hover {
     background-color: #ffffff;
     color: #000000;
+}
+
+.transparentNav .localeBtn {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.transparentNav .localeBtn:hover,
+.transparentNav .localeBtnActive {
+    color: #ffffff;
+}
+
+.transparentNav .localeDivider {
+    color: rgba(255, 255, 255, 0.4);
 }

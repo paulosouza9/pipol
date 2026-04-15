@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Translation cache — commit this file so translations persist across deploys
+# without requiring API calls. Delete it to force a full re-translation.
+# .translations-cache.json

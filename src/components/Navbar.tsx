@@ -1,13 +1,21 @@
-
 "use client";
 
-import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
+import { useParams } from 'next/navigation';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
+    const t = useTranslations('nav');
     const pathname = usePathname();
+    const router = useRouter();
+    const params = useParams();
+    const currentLocale = (params.locale as string) ?? 'es';
+
+    const switchLocale = (locale: string) => {
+        router.replace(pathname, { locale });
+    };
 
     return (
         <nav className={`${styles.nav} ${pathname === '/contact' ? styles.transparentNav : ''}`}>
@@ -15,28 +23,45 @@ const Navbar = () => {
                 <Link href="/" className={styles.logo}>
                     <Image src="/images/logo.png" alt="Pipol" width={300} height={100} priority style={{ objectFit: 'contain' }} />
                 </Link>
-                <Link href="/contact" className={styles.contactBtn}>
-                    Contacto
-                </Link>
+                <div className={styles.topBarRight}>
+                    <div className={styles.localeSwitcher}>
+                        <button
+                            onClick={() => switchLocale('es')}
+                            className={`${styles.localeBtn} ${currentLocale === 'es' ? styles.localeBtnActive : ''}`}
+                        >
+                            ES
+                        </button>
+                        <span className={styles.localeDivider}>|</span>
+                        <button
+                            onClick={() => switchLocale('en')}
+                            className={`${styles.localeBtn} ${currentLocale === 'en' ? styles.localeBtnActive : ''}`}
+                        >
+                            EN
+                        </button>
+                    </div>
+                    <Link href="/contact" className={styles.contactBtn}>
+                        {t('contact')}
+                    </Link>
+                </div>
             </div>
             <div className={styles.links}>
                 <Link
                     href="/news"
-                    className={`${styles.link} ${pathname === '/news' ? styles.activeLink : ''} `}
+                    className={`${styles.link} ${pathname === '/news' ? styles.activeLink : ''}`}
                 >
-                    Novedades
+                    {t('news')}
                 </Link>
                 <Link
                     href="/gallery"
-                    className={`${styles.link} ${pathname === '/gallery' ? styles.activeLink : ''} `}
+                    className={`${styles.link} ${pathname === '/gallery' ? styles.activeLink : ''}`}
                 >
-                    Galería
+                    {t('gallery')}
                 </Link>
                 <Link
                     href="/about"
-                    className={`${styles.link} ${pathname === '/about' ? styles.activeLink : ''} `}
+                    className={`${styles.link} ${pathname === '/about' ? styles.activeLink : ''}`}
                 >
-                    Sobre nosotros
+                    {t('about')}
                 </Link>
             </div>
         </nav>
@@ -44,4 +69,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

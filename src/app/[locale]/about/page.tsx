@@ -1,47 +1,58 @@
-import Image from "next/image";
-import styles from "./about.module.css";
+import { useTranslations } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
+import Image from 'next/image';
+import styles from '../../about/about.module.css';
 
-export default function About() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function About({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  return <AboutContent />;
+}
+
+function AboutContent() {
+  const t = useTranslations('about');
+
   return (
     <main className={styles.main}>
-      {/* Hero Section */}
       <section className={styles.hero}>
         <h1 className={`${styles.heroText} ${styles.animateIn} ${styles.delay1}`}>
-          Pipol es una serie de esculturas minimalistas que exploran la{" "}
-          <span>simplicidad</span>, el <span>equilibrio</span> y la{" "}
-          <span>presencia</span>.
+          {t.rich('heroText', {
+            bold1: (chunks) => <span>{chunks}</span>,
+            bold2: (chunks) => <span>{chunks}</span>,
+            bold3: (chunks) => <span>{chunks}</span>,
+          })}
         </h1>
       </section>
 
-      {/* Split Section */}
       <section className={styles.splitSection}>
         <div className={`${styles.imageWrapper} ${styles.animateIn} ${styles.delay2}`}>
           <Image
             src="/images/pipol1.jpg"
-            alt="Detalle escultura Pipol"
+            alt={t('imageAlt1')}
             fill
             className={styles.image}
           />
         </div>
         <div className={`${styles.splitText} ${styles.animateIn} ${styles.delay3}`}>
-          <p>
-            Nacidas a partir de un objeto cotidiano, las figuras anónimas y de
-            cabeza cuadrada funcionan como símbolos de una manera directa y sin
-            ruido de estar en el mundo.
-          </p>
+          <p>{t('splitText')}</p>
         </div>
       </section>
 
-      {/* Statement Section */}
       <section className={styles.statementSection}>
         <h2 className={`${styles.finalStatement} ${styles.animateIn} ${styles.delay1}`}>
-          Entre lo artesanal y lo industrial, Pipol reivindica la belleza de
-          lo simple y la importancia del <span>gesto</span>.
+          {t.rich('statement', {
+            bold: (chunks) => <span>{chunks}</span>,
+          })}
         </h2>
         <div className={`${styles.statementImageWrapper} ${styles.animateIn} ${styles.delay2}`}>
           <Image
             src="/images/pipol4.jpg"
-            alt="Ambiente Pipol"
+            alt={t('imageAlt2')}
             fill
             className={styles.image}
           />

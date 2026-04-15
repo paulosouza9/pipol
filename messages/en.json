@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "description": "Revolutionary sculptures in Ibiza"
+  },
+  "nav": {
+    "news": "News",
+    "gallery": "Gallery",
+    "about": "About us",
+    "contact": "Contact"
+  },
+  "about": {
+    "heroText": "Pipol is a series of minimalist sculptures exploring <bold1>simplicity</bold1>, <bold2>balance</bold2>, and <bold3>presence</bold3>.",
+    "splitText": "Born from an everyday object, the anonymous square-headed figures work as symbols — a direct and uncluttered way of being in the world.",
+    "statement": "Between the handcrafted and the industrial, Pipol reclaims the beauty of the simple and the importance of the <bold>gesture</bold>.",
+    "imageAlt1": "Pipol sculpture detail",
+    "imageAlt2": "Pipol environment"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "headline1": "Let's talk",
+    "headline2": "about art.",
+    "tagline": "Every sculpture begins with a conversation.",
+    "phoneLabel": "Phone",
+    "mapLabel": "Find us",
+    "footer": "pipol — Contemporary art"
+  },
+  "gallery": {
+    "title": "pipol Collection",
+    "breadcrumbHome": "Home"
+  },
+  "news": {
+    "breadcrumbHome": "Home",
+    "breadcrumbNews": "News",
+    "title": "News",
+    "empty": "New sculptures coming soon."
+  },
+  "product": {
+    "breadcrumbHome": "Home",
+    "breadcrumbGallery": "Gallery",
+    "inquire": "Inquire about this piece",
+    "technicalDetails": "Technical details",
+    "material": "Material",
+    "finish": "Finish",
+    "dimensions": "Dimensions",
+    "authenticity": "Authenticity"
+  }
+}
