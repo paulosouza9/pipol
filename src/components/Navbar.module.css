@@ -89,6 +89,9 @@
     .topBarRight {
         position: relative;
         right: 0;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
     }
 }
 
